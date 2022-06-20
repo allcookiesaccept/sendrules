@@ -1,0 +1,25 @@
+2020:arrFilter_276_1658237082
+2021:arrFilter_276_366051340
+10_2:arrFilter_614_178059945
+8_3:arrFilter_614_2093600666
+12_9:arrFilter_614_2421546147
+11:arrFilter_614_3514402652
+10_9:arrFilter_614_3718086056
+iPad Air:arrFilter_755_114500501
+iPad mini:arrFilter_755_3212238564
+iPad Pro:arrFilter_755_3362909810
+iPad:arrFilter_755_554847047
+зеленый:arrFilter_774_1247487048
+розовое золото:arrFilter_774_1742330277
+серый космос:arrFilter_774_2099517529
+серебристый:arrFilter_774_322443662
+розовый:arrFilter_774_3472890400
+сияющая звезда:arrFilter_774_3534776192
+голубое небо:arrFilter_774_3624362811
+фиолетовый:arrFilter_774_3923243268
+2048Gb:arrFilter_866_283426283
+1024Gb:arrFilter_866_3120654845
+64Gb:arrFilter_866_3420646555
+512Gb:arrFilter_866_3693066087
+256Gb:arrFilter_866_3864286460
+128Gb:arrFilter_866_918371231

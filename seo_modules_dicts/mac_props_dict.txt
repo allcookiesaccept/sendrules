@@ -1,0 +1,37 @@
+2020:arrFilter_276_1658237082
+2018:arrFilter_276_2238619037
+2021:arrFilter_276_366051340
+2017:arrFilter_276_476564519
+14_2:arrFilter_614_2433595583
+24:arrFilter_614_2701594046
+27:arrFilter_614_3014828624
+16_2:arrFilter_614_3703904692
+13_3:arrFilter_614_884272994
+mac pro:arrFilter_755_1063566879
+mac mini:arrFilter_755_1214484105
+imac:arrFilter_755_1444248529
+macBook air:arrFilter_755_2950407054
+macBook pro:arrFilter_755_3638334232
+зеленый:arrFilter_774_1247487048
+серый космос:arrFilter_774_2099517529
+синий:arrFilter_774_2876038948
+золотой:arrFilter_774_3176035365
+серебристый:arrFilter_774_322443662
+розовый:arrFilter_774_3472890400
+фиолетовый:arrFilter_774_3923243268
+желтый:arrFilter_774_4169082417
+mac:arrFilter_846_2283457372
+macbook:arrFilter_846_377380607
+16Gb:arrFilter_881_1437663308
+8Gb:arrFilter_881_3384652940
+32Gb:arrFilter_881_4172374043
+1024Gb:arrFilter_882_3120654845
+512Gb:arrFilter_882_3693066087
+256Gb:arrFilter_882_3864286460
+xeon w:arrFilter_883_1095381646
+core i5:arrFilter_883_1141304230
+m1:arrFilter_883_1439703949
+m1 max:arrFilter_883_1678588770
+m1 pro:arrFilter_883_2463092500
+core i7:arrFilter_883_2852686474
+core i3:arrFilter_883_2909097619
