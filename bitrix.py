@@ -24,11 +24,11 @@ class Bitrix:
         self.driver.set_window_size(1920, 1080)
 
     def enter_bitrix(self):
-
-        url = 'https://api.iport.ru/bitrix/admin'
+        self._get_account_data()
+        url = self.login[4]
         self.driver.get(url)
         time.sleep(2)
-        self._get_account_data()
+
         self._login()
 
     def _get_account_data(self):
@@ -88,7 +88,7 @@ class SeoModule(Bitrix):
 
     def _create_new_setting(self):
 
-        new_setting_url = 'https://api.iport.ru/bitrix/admin/zverushki.seofilter_setting_edit.php?lang=ru'
+        new_setting_url = self.login[3]
         self.driver.get(new_setting_url)
         time.sleep(2)
 
@@ -138,7 +138,7 @@ class SeoModule(Bitrix):
 
     def _edit_setting(self):
 
-        setting_url = f'https://api.iport.ru/bitrix/admin/zverushki.seofilter_setting_edit.php?ID={self.id}&lang=ru'
+        setting_url = f'{self.login[3]}{self.id}&lang=ru'
         self.driver.get(setting_url)
         time.sleep(5)
 
