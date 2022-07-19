@@ -1,13 +1,16 @@
+from bs4 import BeautifulSoup
 from selenium import webdriver
-
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import Select
+import selenium.common.exceptions as selex
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
+import datetime
+import os
 import time
 import csv
+from selenium.webdriver.common.keys import Keys
 from seo_modules_dicts.seo_module_props import folder_props, sections
-from selenium.webdriver.common.action_chains import ActionChains
-
 
 class Bitrix:
 
@@ -18,7 +21,7 @@ class Bitrix:
         self.options.add_argument(f'user-agent={self.headers}')
         self.driver = webdriver.Firefox(executable_path='d:\\drivers\\geckodriver\\geckodriver.exe')
         self.driver.delete_all_cookies()
-        self.driver.set_window_size(1440, 1000)
+        self.driver.set_window_size(1920, 1080)
 
     def enter_bitrix(self):
         self._get_account_data()
@@ -50,6 +53,7 @@ class SeoModule(Bitrix):
     def __init__(self):
         self.folder_props = folder_props
         self.sections = sections
+        self.page_counter = 1
         super().__init__()
 
     def _load_props(self):
@@ -65,8 +69,6 @@ class SeoModule(Bitrix):
         return self.properties
 
     def _get_data_for_setting(self, data):
-
-
         self.id = data['id']
         self.cpu = data['cpu']
         self.folder = data['folder']
@@ -85,7 +87,6 @@ class SeoModule(Bitrix):
                self.setting_description, self.chosen_properties, self.related_settings_top, \
                self.unchosen_properties, self.related_settings_bottom, self.id
 
-
     def _create_new_setting(self):
 
         new_setting_url = self.login[3]
@@ -93,7 +94,6 @@ class SeoModule(Bitrix):
         time.sleep(2)
 
     def _initial_setting_setup(self):
-
         print(f'Creating {self.cpu}')
 
         time.sleep(0.5)
@@ -104,15 +104,12 @@ class SeoModule(Bitrix):
         time.sleep(2)
 
     def _setup_cpu(self):
-
         print('Setting url_name')
 
         self.driver.find_element(By.NAME, 'URL_CPU').send_keys(self.cpu)
         time.sleep(1)
 
     def _setup_tag_names(self):
-        print('Setting Tags')
-
         self.driver.find_element(By.NAME, "TAG_NAME").send_keys(self.card_tag)
         self.driver.find_element(By.NAME, "TAG_SECTION_NAME").send_keys(self.catalog_tag)
         time.sleep(1)
@@ -122,14 +119,12 @@ class SeoModule(Bitrix):
         self.driver.find_element(By.NAME, "RELATED_SETTING_ID2").send_keys(self.related_settings_bottom)
 
     def _setup_meta_data(self):
-
         print(f'Setting meta onpage {self.cpu}')
 
         self.driver.find_element(By.NAME, "PAGE_TITLE").send_keys(self.header)
         self.driver.find_element(By.NAME, "META_TITLE").send_keys(self.title)
         self.driver.find_element(By.NAME, "META_DESCRIPTION").send_keys(self.description)
         time.sleep(1)
-
 
     def _choose_properties(self):
 
@@ -145,6 +140,7 @@ class SeoModule(Bitrix):
             time.sleep(0.5)
 
     def _apply(self):
+
         self.driver.find_element(By.NAME, 'apply').click()
         time.sleep(3)
 
@@ -179,6 +175,9 @@ class SeoModule(Bitrix):
         bottom_links.send_keys(self.related_settings_bottom)
 
     def _replace_meta_data(self):
+
+        print(f'Setting meta onpage {self.cpu}')
+
         header = self.driver.find_element(By.NAME, "PAGE_TITLE")
         header.clear()
         header.send_keys(self.header)
@@ -200,7 +199,6 @@ class SeoModule(Bitrix):
 
     def _load_settings(self, settings_file_path):
 
-        print('Loading Settings')
         self.seo_settings = []
 
         with open(settings_file_path, 'r') as file:
@@ -210,41 +208,87 @@ class SeoModule(Bitrix):
 
         return self.seo_settings
 
+    def _change_description(self):
+
+        print(f'Setting description {self.cpu}')
+        description = self.driver.find_element(By.NAME, 'DESCRIPTION')
+        description.clear()
+        description.send_keys(self.setting_description)
+
     def run(self, settings_file_path):
 
         self.enter_bitrix()
         self._load_settings(settings_file_path)
 
-        count = 1
+        for setting in self.seo_settings:
+            self._get_data_for_setting(setting)
+            if setting['id'] == '':
+                self._load_props()
+                self._create_new_setting()
+                self._initial_setting_setup()
+                self._setup_cpu()
+                self._setup_tag_names()
+                self._setup_meta_data()
+                self._setup_linking()
+                self._choose_properties()
+                self._apply()
+            else:
+                # self._load_props()
+                self._edit_setting()
+                # self._replace_cpu()
+                # self._replace_tag_names()
+                # self._replace_meta_data()
+                self._replace_linking()
+                # self._remove_properties()
+                # self._choose_properties()
+                self._apply()
+
+    def add_new_settings(self, settings_file_path):
+
+        self.enter_bitrix()
+
+        self._load_settings(settings_file_path)
 
         for setting in self.seo_settings:
             self._get_data_for_setting(setting)
-            # self._get_data_for_linking(setting)
             try:
-                if setting['id'] == '':
-                    self._load_props()
-                    self._create_new_setting()
-                    self._initial_setting_setup()
-                    self._setup_cpu()
-                    self._setup_tag_names()
-                    self._setup_meta_data()
-                    self._setup_linking()
-                    self._choose_properties()
-                    self._apply()
-                    print(f'Finished {count} page')
-                    count += 1
-                else:
-                    # self._load_props()
-                    self._edit_setting()
-                    # self._replace_cpu()
-                    # self._replace_tag_names()
-                    # self._replace_meta_data()
-                    self._replace_linking()
-                    # self._remove_properties()
-                    # self._choose_properties()
-                    self._apply()
+                self._load_props()
+                self._create_new_setting()
+                self._initial_setting_setup()
+                self._setup_cpu()
+                self._setup_tag_names()
+                self._setup_meta_data()
+                self._setup_linking()
+                self._choose_properties()
+                self._apply()
+                print(f'Finished {self.page_counter} pages')
+                self.page_counter += 1
             except Exception as ex:
-                # print(f'{self.cpu}-{self.header}\n')
+                print(f'{self.id}')
+                print(ex)
+
+
+    def edit_settings(self, settings_file_path):
+
+        self.enter_bitrix()
+        self._load_settings(settings_file_path)
+
+        for setting in self.seo_settings:
+            self._get_data_for_setting(setting)
+            try:
+                # self._load_props()
+                self._edit_setting()
+                # self._change_description()
+                # self._replace_cpu()
+                # self._replace_tag_names()
+                self._replace_meta_data()
+                # self._replace_linking()
+                # self._remove_properties()
+                # self._choose_properties()
+                self._apply()
+                print(f'Finished {self.page_counter} pages')
+                self.page_counter += 1
+            except Exception as ex:
                 print(f'{self.id}')
                 print(ex)
 
@@ -274,14 +318,7 @@ class ShopPropertiesCleaner(Bitrix):
 
         for prop in self.props_for_delete:
             try:
-                # property_row = self.driver.find_element(By.XPATH, f"//tr[@id='tr_SECTION_PROPERTY_{prop}']").location_once_scrolled_into_view
                 property_elements = self.driver.find_elements(By.XPATH, f"//tr[@id='tr_SECTION_PROPERTY_{prop}']//td")
-
-                # self.driver.execute_script(
-                #     "arguments[0].scrollIntoView();", property_row
-                # )
-                # actions = ActionChains(self.driver)
-                # actions.move_to_element(property_row).perform()
 
                 property_elements[-1].click()
             except Exception as ex:

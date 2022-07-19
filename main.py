@@ -4,7 +4,7 @@ def main():
 
     start = SeoModule()
 
-    start.run('pitanie_kabeli_18072022.csv')
+    start.edit_settings('chekhly_1907.csv')
 
 if __name__ == '__main__':
 
