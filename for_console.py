@@ -13,7 +13,7 @@ from selenium.webdriver.support.ui import Select
 headers = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36'
 options = webdriver.ChromeOptions()
 options.add_argument(f'user-agent={headers}')
-
+# options.add_argument("--auto-open-devtools-for-tabs")
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 with open('login.txt', 'r') as f:
