@@ -22,8 +22,13 @@ class Bitrix:
         self.driver = webdriver.Firefox(executable_path='d:\\drivers\\geckodriver\\geckodriver.exe')
         self.driver.delete_all_cookies()
         self.driver.set_window_size(1920, 1080)
-        self.bitrix_url = 'https://api.iport.ru/bitrix/admin'
 
+        self._get_account_data()
+        self.login_name = self.login[0]
+        self.pswd = self.login[1]
+        self.new_setting_url = self.login[2]
+        self.edit_setting_url = self.login[3]
+        self.enter_url = self.login[4]
 
     def enter_bitrix(self):
 
@@ -38,12 +43,6 @@ class Bitrix:
         with open('login.txt', 'r') as f:
             self.login = f.read().splitlines()
             f.close()
-
-        self.enter_url = self.login[4]
-        self.login_name = self.login[0]
-        self.pswd = self.login[1]
-
-        return self.enter_url, self.login_name, self.pswd
 
     def _login(self):
 

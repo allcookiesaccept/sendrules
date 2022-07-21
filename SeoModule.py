@@ -9,8 +9,6 @@ class SeoModule(Bitrix):
     def __init__(self):
         self.folder_props = folder_props
         self.sections = sections
-        self.new_setting_url = 'https://api.iport.ru/bitrix/admin/zverushki.seofilter_setting_edit.php?lang=ru&IBLOCK_ID=5&SECTION_ID='
-        self.edit_setting_url = 'https://api.iport.ru/bitrix/admin/zverushki.seofilter_setting_edit.php?ID='
         self.page_counter = 1
         super(SeoModule, self).__init__()
 

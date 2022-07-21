@@ -1,4 +1,4 @@
-from bitrix import SeoModule
+from SeoModule import SeoModule
 
 def main():
 
