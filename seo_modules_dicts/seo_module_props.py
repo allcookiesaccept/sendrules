@@ -2,8 +2,9 @@ folder_props = {'watch': 'D:\pyprojects\sendrules\seo_modules_dicts\watch_props_
                 'mac': 'D:\pyprojects\sendrules\seo_modules_dicts\mac_props_dict.txt',
                 'Чехлы': 'D:\pyprojects\sendrules\seo_modules_dicts\chekhly_props_dict.txt',
                 'Питание и кабели': 'D:\pyprojects\sendrules\seo_modules_dicts\cables_props_dict.txt',
-                'iphone': 'iphone_props.txt', 'Ремешки для часов': 'clock_straps_props_dict.txt',
-                'Защитные стекла': 'glasses_props_dict.txt'
+                'iphone': 'D:\pyprojects\sendrules\seo_modules_dicts\iphone_props.txt',
+                'Ремешки для часов': 'D:\pyprojects\sendrules\seo_modules_dicts\clock_straps_props_dict.txt',
+                'Защитные стекла': 'D:\pyprojects\sendrules\seo_modules_dicts\glasses_props_dict.txt'
                 }
 
 sections = {'iPhone': '103', 'Mac': '76', 'iPad': '86', 'Watch': '115', 'Внешние аккумуляторы': '453', 'Аксессуары для фото/видео': '377',
