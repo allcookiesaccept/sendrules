@@ -30,14 +30,18 @@ class Bitrix:
         self.edit_setting_url = self.login[3]
         self.enter_url = self.login[4]
         self.catalog_1c_url = self.login[5]
+        self.sitemap_settings_url = self.login[6]
 
     def enter_bitrix(self):
 
-        self._get_account_data()
         self.driver.get(self.enter_url)
         self.driver.implicitly_wait(3)
         self._login()
         time.sleep(3)
+
+    def close_bitrix(self):
+
+        self.driver.close()
 
     def _get_account_data(self):
 
