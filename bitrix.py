@@ -29,6 +29,7 @@ class Bitrix:
         self.new_setting_url = self.login[2]
         self.edit_setting_url = self.login[3]
         self.enter_url = self.login[4]
+        self.catalog_1c_url = self.login[5]
 
     def enter_bitrix(self):
 

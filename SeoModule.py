@@ -101,16 +101,16 @@ class SeoModule(Bitrix):
 
             try:
                 self._open_existing_setting()
-                self._add_setting_description()
-                self._setting_header()
-                self._setting_meta_title()
-                self._setting_meta_description()
-                self._setting_product_tag_name()
-                self._setting_catalog_tag_name()
+                # self._add_setting_description()
+                # self._setting_header()
+                # self._setting_meta_title()
+                # self._setting_meta_description()
+                # self._setting_product_tag_name()
+                # self._setting_catalog_tag_name()
                 self._setting_top_linking()
                 self._setting_bottom_linking()
-                self._remove_properties()
-                self._choose_properties()
+                # self._remove_properties()
+                # self._choose_properties()
                 self._apply_seo_setting()
                 self._page_counter_update()
 
@@ -232,11 +232,11 @@ class SeoModule(Bitrix):
 
 def main():
 
-    file = 'iphone_years.csv'
+    file = 'pitanie_kabeli_25072022_linking.csv'
 
     service = SeoModule()
 
-    service.add_new_settings(file, 'iphone')
+    service.edit_settings(file, 'Питание и кабели')
 
 if __name__ == '__main__':
 
